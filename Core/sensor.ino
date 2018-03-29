@@ -37,14 +37,10 @@ void printSensor(sensor value){
 }
 
 void output_control(sensor value, configure conf){
-  if(value.mois < conf.mois){
-    digitalWrite(relaypin, 1);
-  }
-  /*if(value.humid > conf.humid || value.temp > conf.temp || value.mois < conf.mois){
+  if(value.humid < conf.humid || value.temp > conf.temp || value.mois < conf.mois){
     digitalWrite(relaypin, 1);
   }else{
     digitalWrite(relaypin, 0);
-  }*/
-  
+  }
 }
 
