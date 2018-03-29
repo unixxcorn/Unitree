@@ -1,14 +1,3 @@
-int bootSDcard(){
-  Serial.print("Accessing SD card...");
-  if(!SD.begin(CSpin)){
-    Serial.println("Fail to access!");
-    return 1;
-  }
-  Serial.println("SD card is good.");
-  Serial.println("Reading configuration from SD Card");
-  return 0;
-}
-
 void fileWrite(String filename, String data){
   file = SD.open(filename, FILE_WRITE);
   file.println(data);

@@ -1,1 +1,3 @@
-Core/config.h
+*/config.h
+*.old
+.gitignore
