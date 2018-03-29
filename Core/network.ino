@@ -13,8 +13,11 @@ void wlan_connect(){
   timeClient.begin();
 }
 void NTP2RTC(){
+  timeClient.update();
   RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
+  unsigned long epochTime =  timeClient.getEpochTime();
   Serial.println(compiled);
+  Serial.println(epochTime);
   rtc.SetDateTime(compiled);
 }
 String ntp(){

@@ -69,6 +69,7 @@ void setup(){
   Serial.println(conf.mois);
   NTP2RTC();
   Serial.println(ntp());
+  printSensor(readSensor());
   delay(500);
 }
 

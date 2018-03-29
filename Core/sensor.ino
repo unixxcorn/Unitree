@@ -24,32 +24,16 @@ void bootOutput(){
 }
 
 void printSensor(sensor value){
-  Serial.print("[");
-  Serial.print(value.times.Day(), DEC);
-  Serial.print("/");
-  Serial.print(value.times.Month(), DEC);
-  Serial.print("/");
-  Serial.print(value.times.Year(), DEC);
-  Serial.print(" - ");
-  Serial.print(value.times.Hour(), DEC);
-  Serial.print(":");
-  Serial.print(value.times.Minute(), DEC);
-  Serial.print(":");
-  Serial.print(value.times.Second(), DEC);
-  Serial.print("] ");
-  Serial.println("");
-  
-  Serial.print("Humid : ");
-  Serial.print(value.humid, 2);
-  Serial.println(" %");
-  
-  Serial.print("Temp  : ");
-  Serial.print(value.temp, 2);
-  Serial.println(" C");
-  
-  Serial.print("Mois  : ");
-  Serial.print(value.mois, DEC);
-  Serial.println("");
+  Serial.print("[");  Serial.print(value.times.Day(), DEC);
+  Serial.print("/");  Serial.print(value.times.Month(), DEC);
+  Serial.print("/");  Serial.print(value.times.Year(), DEC);
+  Serial.print(" - ");Serial.print(value.times.Hour(), DEC);
+  Serial.print(":");  Serial.print(value.times.Minute(), DEC);
+  Serial.print(":");  Serial.print(value.times.Second(), DEC);
+  Serial.print("] "); Serial.println("");
+  Serial.print("Humid : ");Serial.print(value.humid, 2); Serial.println(" %");  
+  Serial.print("Temp  : ");Serial.print(value.temp, 2);  Serial.println(" C");
+  Serial.print("Mois  : ");Serial.print(value.mois, DEC);Serial.println("");
 }
 
 void output_control(sensor value, configure conf){
