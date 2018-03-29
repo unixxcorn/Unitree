@@ -1,6 +1,9 @@
 // Config Wireless Lan
-#define ssid "WIFI NAME"     //Wifi name
-#define password "SUPER SECRET PASSWORD" //Wifi password
+#define ssid "WIFI NAME"                  //Wifi name
+#define password "SUPER SECRET PASSWORD"  //Wifi password
+
+// Config Time Zone
+#define timezone 0
 
 // Config Port
 #define HTTPport 80

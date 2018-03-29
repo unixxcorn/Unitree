@@ -6,7 +6,6 @@ int bootSDcard(){
   }
   Serial.println("SD card is good.");
   Serial.println("Reading configuration from SD Card");
-  
   return 0;
 }
 
@@ -34,15 +33,10 @@ String fileRead(String filename){
 configure configRead(String fileName){
   if(fileRead(fileName) != "error"){
     String confi = fileRead(fileName);
-    Serial.println(confi);
     conf.isslave = confi[0];
     conf.humid = confi[1];
     conf.temp = confi[2];
     conf.mois = confi[3];
-    Serial.println(conf.isslave);
-    Serial.println(conf.humid);
-    Serial.println(conf.temp);
-    Serial.println(conf.mois);
     return conf;
   }else{
     file = SD.open(fileName, FILE_WRITE);

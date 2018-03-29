@@ -4,6 +4,10 @@
 #include <DHT.h>
 #include <SPI.h>
 #include <SD.h>
+#include <NTPClient.h>
+#include <WiFiUdp.h>
+#include <Time.h>
+#include <TimeLib.h>
 #include "config.h"
 // ====================[ I/O Module ]====================
 //  DHT         Temperature and Humidity sensor
@@ -26,12 +30,14 @@ typedef struct{
 } sensor;
 typedef struct{
   int isslave = 0;
-  float humid = 50.0;
-  float temp = 50.0;
-  unsigned int mois = 80;
+  float humid = 0.0;
+  float temp = 0.0;
+  unsigned int mois = 0;
 } configure;
 String input = "";
 File file;
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "time.nist.gov", ((int)timezone)*3600, 60000);
 
 // Define function
 void bootSensor();
@@ -50,8 +56,6 @@ configure conf;
 
 // Main Function
 void setup(){
-  ESP.wdtDisable();
-  ESP.wdtEnable(WDTO_8S);
   Serial.begin(Baud);
   Serial.println("Booting..");
   bootSensor();
@@ -63,8 +67,9 @@ void setup(){
   Serial.println(conf.humid);
   Serial.println(conf.temp);
   Serial.println(conf.mois);
+  NTP2RTC();
+  Serial.println(ntp());
   delay(500);
-  
 }
 
 void loop(){

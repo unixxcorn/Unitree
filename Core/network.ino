@@ -10,8 +10,30 @@ void wlan_connect(){
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
   server.begin();
+  timeClient.begin();
 }
-
+void NTP2RTC(){
+  RtcDateTime compiled = RtcDateTime(__DATE__, __TIME__);
+  Serial.println(compiled);
+  rtc.SetDateTime(compiled);
+}
+String ntp(){
+  String date = "";
+  timeClient.update();
+  unsigned long epochTime =  timeClient.getEpochTime();
+  time_t t;
+  t = epochTime;
+  date += day(t);  date += ", ";
+  date += month(t);date += ", ";
+  date += year(t); date += " ";
+  date += hour(t); date += ":";
+  if(minute(t) < 10)  // add a zero if minute is under 10
+    date += "0";
+  date += minute(t);
+  date += ":";
+  date += second(t);
+  return date;
+}
 configure runServer(sensor value, configure conf){
   WiFiClient client = server.available();
   if(client){ 
@@ -39,7 +61,6 @@ configure runServer(sensor value, configure conf){
 
           if(filename != "error" && filename != "favicon.ico" && filename != "status" && filename != "config"){
             filename += ".NTR";
-            Serial.println(filename);
             String page = fileRead(filename);
             response(page, client);
           }else if(filename == "status"){
@@ -138,7 +159,6 @@ configure runServer(sensor value, configure conf){
             response(page, client);
           }
         }
-        Serial.println("HTTP Close");
         delay(100);
       }
   }
