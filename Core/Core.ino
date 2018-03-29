@@ -83,32 +83,3 @@ void loop(){
   } // comment if don't want to see sensor value*/
   delay(500);
 }
-
-// Function
-
-void output_control(sensor value, configure conf){
-  if(value.mois < conf.mois){
-    digitalWrite(relaypin, 1);
-  }
-  /*if(value.humid > conf.humid || value.temp > conf.temp || value.mois < conf.mois){
-    digitalWrite(relaypin, 1);
-  }else{
-    digitalWrite(relaypin, 0);
-  }*/
-  
-}
-
-void wlan_connect(){
-  Serial.println("Connecting to WiFi"); 
-  WiFi.begin(ssid, password);
-  while(WiFi.status() != WL_CONNECTED) {
-    delay(250);
-    Serial.print("|");
-  }
-  Serial.println("");
-  Serial.println("WiFi connected");  
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
-  server.begin();
-}
-

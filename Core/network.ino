@@ -1,3 +1,17 @@
+void wlan_connect(){
+  Serial.println("Connecting to WiFi"); 
+  WiFi.begin(ssid, password);
+  while(WiFi.status() != WL_CONNECTED) {
+    delay(250);
+    Serial.print("|");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");  
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+  server.begin();
+}
+
 configure runServer(sensor value, configure conf){
   WiFiClient client = server.available();
   if(client){ 
