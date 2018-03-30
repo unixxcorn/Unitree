@@ -7,6 +7,7 @@
 //  Relay       Control Output
 //  Mist Spray  Control Humidity
 // ======================================================
+void webserve();
 
 void setup(void) {
   // put your setup code here, to run once:
@@ -15,23 +16,47 @@ void setup(void) {
   bootSensor();
   bootOutput();
   wifi_connect();
-  webserve();
-  if(SD.begin(SS)){
+  if(slave == 0 && SD.begin(SS)){
+    hasSD = true;
     Serial.println("SD Card initialized.");
-  }
-  conf = configRead("config.utc");
+    conf = configRead("config.utc");
+    webserve();
+  }/*else{ // Slave Mode Not Ready
+    Serial.println("Slave mode");
+    HTTPClient http;
+    http.begin(murl);
+    int httpCode = http.GET();
+    Serial.println();
+    Serial.println(http.getString());
+    if (httpCode > 0) {
+      // Get the request response payload
+      DynamicJsonBuffer jsonBuffer(512);
+      JsonObject& root = jsonBuffer.parseObject(http.getString());
+      Serial.println((int)root["temp"]);
+      
+    }
+    http.end();
+  }*/
 }
 
 void loop(void) {
   // put your main code here, to run repeatedly:
-  sensor temp = readSensor();
-  if(isnan(temp.humid) || isnan(temp.temp)){
-    value.times = temp.times;
-    value.mois = temp.mois;
-  }else{
-    value = temp;
+  
+  if(millis() % 1000 == 0){
+    sensor temp = readSensor();
+    if(isnan(temp.humid) || isnan(temp.temp)){
+      value.times = temp.times;
+      value.mois = temp.mois;
+      printSensor(value);
+    }else{
+      value = temp;
+    }
+    output_control(value, conf);    
   }
-  output_control(value, conf);
-  server.handleClient();
-  delay(100);
+  if(hasSD){
+    server.handleClient();
+    delay(100);
+  }else{
+    delay(300000);
+  }
 }

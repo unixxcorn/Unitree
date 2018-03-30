@@ -30,19 +30,20 @@ void handleStatus(){
   temp += " ";  temp += value.times.Hour();
   temp += ":";  temp += value.times.Minute();
   temp += ":";  temp += value.times.Second();
-  temp += "\",\"temp\":\""; temp += value.temp;
-  temp += "\",\"humid\":\""; temp += value.humid;
-  temp += "\",\"mois\":\""; temp += value.humid;
-  temp += "\"}";
+  temp += "\",\"temp\":"; temp += value.temp;
+  temp += ",\"humid\":"; temp += value.humid;
+  temp += ",\"mois\":"; temp += value.mois;
+  temp += "}";
   server.send(200, "text/json", temp);
 }
 
 void handleConfig(){
+  conf = configRead("config.utc");
   String temp = "{";
   temp += "\"IP Address\":\"";temp += (char*) WiFi.localIP().toString().c_str();
-  temp += "\",\"temp\":\"";   temp += value.temp;
-  temp += "\",\"humid\":\"";  temp += value.humid;
-  temp += "\",\"mois\":\"";   temp += value.humid;
+  temp += "\",\"temp\":\"";   temp += conf.temp;
+  temp += "\",\"humid\":\"";  temp += conf.humid;
+  temp += "\",\"mois\":\"";   temp += conf.mois;
   temp += "\"}";
   server.send(200, "text/json", temp);
 }
@@ -70,14 +71,13 @@ bool loadFromSdCard(String path){
   else if(path.endsWith(".xml")) dataType = "text/xml";
   else if(path.endsWith(".pdf")) dataType = "application/pdf";
   else if(path.endsWith(".zip")) dataType = "application/zip";
-
+  
   File dataFile = SD.open(path.c_str());
   if(dataFile.isDirectory()){
     path += "/index.htm";
     dataType = "text/html";
     dataFile = SD.open(path.c_str());
   }
-  
   
   if (!dataFile){
     return false;

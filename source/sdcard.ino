@@ -34,3 +34,18 @@ configure configRead(String fileName){
     configRead(fileName);
   }
 }
+
+void logFile(String msg){
+    String temp = "";temp += value.times.Year();
+    temp += "-";temp += value.times.Month();
+    temp += "-";temp += value.times.Day();
+    temp += " - ";temp += value.times.Hour();
+    temp += ":";temp += value.times.Minute();
+    temp += ":";temp += value.times.Second();
+    temp += ",";temp += value.temp;
+    temp += ",";temp += value.humid;
+    temp += ",";temp += value.mois;
+    temp += ",";temp += msg;
+    fileWrite("water.log", temp);
+}
+

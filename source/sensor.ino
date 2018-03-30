@@ -24,9 +24,25 @@ void bootOutput(){
 
 void output_control(sensor value, configure conf){
   if(value.humid > conf.humid || value.temp > conf.temp || value.mois < conf.mois){
+    logFile("Water");
     digitalWrite(relaypin, 1);
+    
   }else{
     digitalWrite(relaypin, 0);
   }
   
 }
+
+void printSensor(sensor value){
+  String temp = "";temp += value.times.Year();
+  temp += "-";temp += value.times.Month();
+  temp += "-";temp += value.times.Day();
+  temp += " - ";temp += value.times.Hour();
+  temp += ":";temp += value.times.Minute();
+  temp += ":";temp += value.times.Second();
+  temp += ",";temp += value.temp;
+  temp += ",";temp += value.humid;
+  temp += ",";temp += value.mois;
+  Serial.println(temp);
+}
+
