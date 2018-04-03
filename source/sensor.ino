@@ -23,14 +23,20 @@ void bootOutput(){
 }
 
 void output_control(sensor value, configure conf){
-  if(value.humid > conf.humid || value.temp > conf.temp || value.mois < conf.mois){
+  if(value.humid < conf.humid || value.temp > conf.temp || value.mois < conf.mois){
     logFile("Water");
     digitalWrite(relaypin, 1);
-    
+
   }else{
+    if(value.humid > conf.humid){
+      logFile("Humidity too high!");
+    }if(value.temp < conf.temp){
+      logFile("Temperature too low!");
+    }if(value.mois > conf.humid){
+      logFile("Moisture too high!");
+    }
     digitalWrite(relaypin, 0);
   }
-  
 }
 
 void printSensor(sensor value){
