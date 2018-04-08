@@ -1,15 +1,18 @@
 sensor readSensor(){
   sensor value;
   value.times = rtc.GetDateTime();
-  value.humid = dht.readHumidity();
-  value.temp  = dht.readTemperature();  
+  value.humid = dht0.readHumidity();
+  value.temp  = dht0.readTemperature();  
+  value.humid = isnan(value.humid)? dht1.readHumidity() : dht0.readHumidity();
+  value.temp  = isnan(value.temp) ? dht1.readTemperature(): dht0.readTemperature();  
   value.mois  = map(1024 - analogRead(yl_apin), 0, 1024, 0 , 100);
   return value;
 }
 
 void bootSensor(){
   Serial.println("Checking Sensor"); 
-  dht.begin();  // start DHT Sensor
+  dht0.begin();
+  dht1.begin(); // start DHT Sensor
   rtc.Begin();  // start RTC (using I2C)
   delay(300);
 }

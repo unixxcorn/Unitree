@@ -38,6 +38,19 @@ void handleStatus(){
 }
 
 void handleConfig(){
+  Serial.println(( server.method() == HTTP_GET ) ? "GET" : "POST");
+  if(server.method() != HTTP_GET){
+    Serial.println(server.args());
+    String val = "";
+    for (int i = 0; i < server.args(); i++) {
+      Serial.println(server.argName(i)+": "+server.arg(i));
+    }
+    val += server.arg(3);
+    val += server.arg(0);
+    val += server.arg(1);
+    val += server.arg(2);
+    fileOverwrite("config.utc", val);
+  }
   conf = configRead("config.utc");
   String temp = "{";
   temp += "\"IP Address\":\"";temp += (char*) WiFi.localIP().toString().c_str();

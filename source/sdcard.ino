@@ -19,6 +19,11 @@ String fileRead(String filename){
   }
 }
 
+void fileOverwrite(String filename, String data){
+  SD.remove(filename.c_str());
+  fileWrite(filename, data);
+}
+
 configure configRead(String fileName){
   if(fileRead(fileName) != "error"){
     String confi = fileRead(fileName);

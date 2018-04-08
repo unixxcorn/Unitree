@@ -14,7 +14,8 @@
 #include <TimeLib.h>
 #include "config.h"
 
-DHT dht(dht_dpin, DHTTYPE); 
+DHT dht0(dht_pin0, DHTTYPE);
+DHT dht1(dht_pin1, DHTTYPE);
 RtcDS3231<TwoWire> rtc(Wire);
 ESP8266WebServer server(HTTPport);
 typedef struct{
