@@ -1,0 +1,11 @@
+<div class="row col-12">
+    <div class="col-12">Temperature</div>
+    <div class="col-12 bar"><bar style="width: 0%;">50</bar></div>
+    <div class="col-12">Humidity</div>
+    <div class="col-12 bar"><bar style="width: 0%;">40</bar></div>
+    <div class="col-12">Soil Moisture</div>
+    <div class="col-12 bar"><bar style="width: 0%;">30</bar></div>
+    <div class="col-6"><button>Water</button></div>
+    <div class="col-6"><button>Auto Mode</button></div>
+</div>
+<script src="./js/slider.js"></script>

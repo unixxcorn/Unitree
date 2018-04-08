@@ -1,0 +1,21 @@
+<form method="POST" class="row col-12">
+    <div class="col-12">Temperature : <b id="t">0</b></div>
+    <div class="col-12"><input oninput="slider()" name="t" type="range" min="0" max="100" value="
+50
+    "></div>
+    <div class="col-12">Humidity : <b id="h">0</b></div>
+    <div class="col-12"><input oninput="slider()" name="h" type="range" min="0" max="100" value="
+50
+    "></div>
+    <div class="col-12">Soil Moisture : <b id="m">0</b></div>
+    <div class="col-12"><input oninput="slider()" name="m" type="range" min="0" max="100" value="
+50
+    "></div>
+    <div class="col-4"><button>Apply</button></div>
+    <div class="col-4"><input type="checkbox" name="mode" value="1" 
+checked
+    >Slave</div>
+    <div class="col-4"><input type="checkbox" name="mode" value="1" 
+checked
+    >Firebase</div>
+</form>

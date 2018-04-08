@@ -1,0 +1,103 @@
+@font-face{
+    font-family: font;
+    src:url("./font.ttf");
+}
+*{
+    font-family: font !important;
+    font-size: 16pt;
+}
+body{
+    background-image: url("./bg0.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: table-cell;
+    color: #fff;
+    
+}
+#frame{
+    display: inline-grid;
+    padding: 1em;
+    background: url("./bg1.png");
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    width: 90vh;
+    min-width: 380px;
+    min-height: 210px;
+}
+.bar{
+    margin:0.1em;
+    height:1.3em;
+    background:url("./bar0.png");
+    background-size: 100% 100%;
+    padding: 2px;
+}
+bar{
+    display: inherit;
+    transition: .7s;
+    background:url("./bar1.png");
+    background-size: 100% 100%;
+    height: 100%;
+    font-size: small;
+}
+button{
+    background:url("./button.png");
+    background-size: 100% 100%;
+    border:none;
+    padding: 15px;
+}
+button:hover{
+    color:white;
+}
+button:active, button:focus{
+    background:url("./buttonc.png");
+    background-size: 100% 100%;
+    border:none;
+    color:white;
+}
+input[type="range"]{
+    width: 100%;
+    -webkit-appearance: none;
+    background:url("./bar0.png");
+    background-size: 100% 100%;
+    height: 0.8em;
+
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background:url("./bar2.png");
+    background-size: 100% 100%;
+    cursor: pointer;
+    
+}
+input[type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: green;
+    cursor: pointer;
+    
+}
+input[type=checkbox], input[type=radio] {
+    width:25px;
+    height: 25px;
+    content: ' ';
+    margin:0 .3em;
+    -webkit-appearance: none;
+    background-image: url("./button.png");
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+input[type=checkbox]:checked{
+    position: relative;
+}
+input[type=checkbox]:checked::after {
+    content: '\2714';
+    font-size: 20px;
+    position: absolute;
+    left: 5px;
+}
