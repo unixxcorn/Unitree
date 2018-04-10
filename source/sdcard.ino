@@ -54,3 +54,33 @@ void logFile(String msg){
     fileWrite("water.log", temp);
 }
 
+void StrToInt(char data[]){/*ex-input "100,50,30,1" or "100,100,100,100"*/
+    char data[17];
+    int i, j, k, check = 0, stard = 0, order = 1 memo[4] = {0, 0, 0, 0};
+    for(i = 0; i < 17;i++){
+        if(data[i] == ',' || data[i] == '\0'){
+            for(j = stard;j < i:j++){
+                if(i - stard == 1 && check == 0){
+                  order = 1;
+                  check = 1;
+                }if(i - stard == 2 && check == 0){
+                  order = 10;
+                  check = 1;
+                }if(i - stard == 3 && check == 0){
+                  order = 100;
+                  check = 1;
+                }
+                memo[k] += (data[j] - 48) * order;
+                order /= 10;
+                if(data[i] == '\0'){break;}
+            }
+            check = 0;
+            stard = i+1;
+            k++;
+        }
+    }
+    conf.isslave = memo[0];
+    conf.humid = memo[1];
+    conf.temp = memo[2];
+    conf.mois = memo[3];
+}
