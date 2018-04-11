@@ -4,6 +4,7 @@ void webserve(){
   server.on("/status", handleStatus);
   server.on("/config", handleConfig);
   server.on("/water", handleWater);
+  server.on("/form", handleForm);
   server.onNotFound(handleSDCard);
   Serial.println("HTTP server started");
   
@@ -23,7 +24,7 @@ void handleSlave(){
 }
 
 void handleWater(){
-  logFile("Water");
+  logFile("Water by user");
   digitalWrite(relaypin, 1);
   delay(delayTimes);
   digitalWrite(relaypin, 0);
@@ -32,8 +33,8 @@ void handleWater(){
 
 void handleStatus(){
   sensor value = readSensor();
-  String temp = "{";
-  temp += "\"time\":\"";   temp += value.times.Year();
+  String temp = "";
+  /*temp += "{\"time\":\"";   temp += value.times.Year();
   temp += "-";  temp += value.times.Month();
   temp += "-";  temp += value.times.Day();
   temp += " ";  temp += value.times.Hour();
@@ -42,7 +43,14 @@ void handleStatus(){
   temp += "\",\"temp\":"; temp += value.temp;
   temp += ",\"humid\":"; temp += value.humid;
   temp += ",\"mois\":"; temp += value.mois;
-  temp += "}";
+  temp += "}";*/
+  temp += "<div class=\"row col-12\"><div class=\"col-12\">Temperature</div><div class=\"col-12 bar\"><bar style=\"width: 0%;\">";
+  temp += value.temp;
+  temp += "</bar></div><div class=\"col-12\">Humidity</div><div class=\"col-12 bar\"><bar style=\"width: 0%;\">";
+  temp += value.humid;
+  temp += "</bar></div><div class=\"col-12\">Soil Moisture</div><div class=\"col-12 bar\"><bar style=\"width: 0%;\">";
+  temp += value.mois;
+  temp += "</bar></div><div class=\"col-6\"><a href=\"./water\"><button>Water</button></a></div><div class=\"col-6\"><a href=\"./setting.htm\"><button>Setting</button></a></div></div><script src=\"./js/slider.js\"></script>";
   server.send(200, "text/json", temp);
 }
 
@@ -65,12 +73,32 @@ void handleConfig(){
     fileOverwrite("config.utc", val);
   }
   conf = configRead("config.utc");
-  String temp = "{";
-  temp += "\"IP Address\":\"";temp += (char*) WiFi.localIP().toString().c_str();
+  loadFromSdCard("setting.htm");
+}
+
+void handleForm(){
+  conf = configRead("config.utc");
+  String temp = "";
+  /*temp += "{\"IP Address\":\"";temp += (char*) WiFi.localIP().toString().c_str();
   temp += "\",\"temp\":\"";   temp += conf.temp;
   temp += "\",\"humid\":\"";  temp += conf.humid;
   temp += "\",\"mois\":\"";   temp += conf.mois;
-  temp += "\"}";
+  temp += "\"}";*/
+  temp += "<form method=\"POST\" class=\"row col-12\" action=\"http://192.168.1.60/config\"><div class=\"col-12\">Temperature : <b id=\"t\">";
+  temp += conf.temp;
+  temp += "</b></div><div class=\"col-12\"><input oninput=\"slider()\" name=\"t\" type=\"range\" min=\"0\" max=\"100\" value=\"";
+  temp += conf.temp;
+  temp += "\"></div><div class=\"col-12\">Humidity : <b id=\"h\">";
+  temp += conf.humid;
+  temp += "</b></div><div class=\"col-12\"><input oninput=\"slider()\" name=\"h\" type=\"range\" min=\"0\" max=\"100\" value=\"";
+  temp += conf.humid;
+  temp += "\"></div><div class=\"col-12\">Soil Moisture : <b id=\"m\">";
+  temp += conf.mois;
+  temp += "</b></div><div class=\"col-12\"><input oninput=\"slider()\" name=\"m\" type=\"range\" min=\"0\" max=\"100\" value=\"";
+  temp += conf.mois;
+  temp += "\"></div><div class=\"col-6\"><button>Apply</button></div><input type=\"hidden\" name=\"mode\" value=\"0\"><div class=\"col-6\"><input type=\"hidden\" name=\"fire\" value=\"0\"><input type=\"checkbox\" name=\"fire\" value=\"1\"";
+  temp += conf.isfirebase > 0 ? "checked" : "";
+  temp += ">Firebase</div></form>";
   server.send(200, "text/json", temp);
 }
 

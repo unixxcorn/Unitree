@@ -11,7 +11,7 @@
     <div class="col-12"><input oninput="slider()" name="m" type="range" min="0" max="100" value="
 50
     "></div>
-    <div class="col-6"><button>Apply</button></div>
-    <input type="hidden" name="mode" value="0">
-    <div class="col-6"><input type="hidden" name="fire" value="0"><input type="checkbox" name="fire" value="1" checked>Firebase</div>
+    <div class="col-4"><button>Apply</button></div>
+    <div class="col-4"><input type="hidden" name="mode" value="0"><input type="checkbox" name="mode" value="1" checked>Slave</div>
+    <div class="col-4"><input type="hidden" name="fire" value="0"><input type="checkbox" name="fire" value="1" checked>Firebase</div>
 </form>

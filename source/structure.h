@@ -25,6 +25,7 @@ typedef struct{
 } sensor;
 typedef struct{
   int isslave = 0;
+  int isfirebase = 0;
   float humid = 0.0;
   float temp = 0.0;
   unsigned int mois = 0;

@@ -13,6 +13,7 @@ void setup(void) {
   // put your setup code here, to run once:
   Serial.begin(baud);
   Serial.setDebugOutput(debug);
+  conf.isfirebase = firebase;
   bootSensor();
   bootOutput();
   wifi_connect();
@@ -43,8 +44,9 @@ void setup(void) {
     }
     http.end();
     Serial.println(payload);
+    StrToInt(payload);
   }
-  StrToInt(payload);
+  
 }
 
 void loop(void) {
