@@ -6,6 +6,6 @@
     <div class="col-12">Soil Moisture</div>
     <div class="col-12 bar"><bar style="width: 0%;">30</bar></div>
     <div class="col-6"><a href="./water"><button>Water</button></a></div>
-    <div class="col-6"><a href="./setting.html"><button>Setting</button></a></div>
+    <div class="col-6"><a href="./setting.htm"><button>Setting</button></a></div>
 </div>
 <script src="./js/slider.js"></script>

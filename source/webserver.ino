@@ -3,6 +3,7 @@ void webserve(){
   server.on("/slave", handleSlave);
   server.on("/status", handleStatus);
   server.on("/config", handleConfig);
+  server.on("/water", handleWater);
   server.onNotFound(handleSDCard);
   Serial.println("HTTP server started");
   
@@ -19,6 +20,14 @@ void returnFail(String msg) {
 
 void handleSlave(){
   server.send(200, "text/json", fileRead("config.utc"));
+}
+
+void handleWater(){
+  logFile("Water");
+  digitalWrite(relaypin, 1);
+  delay(delayTimes);
+  digitalWrite(relaypin, 0);
+  loadFromSdCard("/");
 }
 
 void handleStatus(){
