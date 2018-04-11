@@ -54,8 +54,8 @@ void logFile(String msg){
     fileWrite("water.log", temp);
 }
 
-void StrToInt(char data[]){/*ex-input "100,50,30,1" or "100,100,100,100"*/
-    char data[17];
+void StrToInt(String text){/*ex-input "100,50,30,1" or "100,100,100,100"*/
+    char* data = strdup(text.c_str());
     int i, j, k, check = 0, stard = 0, order = 1 ,memo[4] = {0, 0, 0, 0};
     for(i = 0; i < 17;i++){
         if(data[i] == ',' || data[i] == '\0'){
