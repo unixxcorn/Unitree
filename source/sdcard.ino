@@ -27,14 +27,15 @@ void fileOverwrite(String filename, String data){
 configure configRead(String fileName){
   if(fileRead(fileName) != "error"){
     String confi = fileRead(fileName);
-    conf.isslave = confi[0];
+    StrToInt(confi);
+    /*conf.isslave = confi[0];
     conf.humid = confi[1];
     conf.temp = confi[2];
-    conf.mois = confi[3];
+    conf.mois = confi[3];*/
     return conf;
   }else{
     file = SD.open(fileName, FILE_WRITE);
-    file.printf("%c%c%c%c", 0 , 30 , 30 , 30);
+    file.printf("0,30,30,50");
     file.close();
     configRead(fileName);
   }
@@ -54,7 +55,7 @@ void logFile(String msg){
     fileWrite("water.log", temp);
 }
 
-void StrToInt(String text){/*ex-input "100,50,30,1" or "100,100,100,100"*/
+void StrToInt(String text){/*ex-input "100,50,30,1,\0" */
     char* data = strdup(text.c_str());
     int i, j, k, check = 0, stard = 0, order = 1 ,memo[4] = {0, 0, 0, 0};
     for(i = 0; i < 17;i++){

@@ -18,7 +18,7 @@ void returnFail(String msg) {
 }
 
 void handleSlave(){
-  server.send(200, "text/json", "{\"name\":\"John\",\"age\":30,\"cars\":[ \"Ford\", \"BMW\", \"Fiat\" ]}");
+  server.send(200, "text/json", fileRead("config.utc"));
 }
 
 void handleStatus(){
@@ -44,11 +44,15 @@ void handleConfig(){
     String val = "";
     for (int i = 0; i < server.args(); i++) {
       Serial.println(server.argName(i)+": "+server.arg(i));
+      
     }
-    val += server.arg(3);
-    val += server.arg(0);
-    val += server.arg(1);
-    val += server.arg(2);
+    val += server.arg(3)+",";
+    val += server.arg(0)+",";
+    val += server.arg(1)+",";
+    val += server.arg(2)+",";
+    val += "\0";
+    Serial.println(val);
+    StrToInt(val);
     fileOverwrite("config.utc", val);
   }
   conf = configRead("config.utc");
