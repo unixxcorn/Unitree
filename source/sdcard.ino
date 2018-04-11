@@ -56,10 +56,10 @@ void logFile(String msg){
 
 void StrToInt(char data[]){/*ex-input "100,50,30,1" or "100,100,100,100"*/
     char data[17];
-    int i, j, k, check = 0, stard = 0, order = 1 memo[4] = {0, 0, 0, 0};
+    int i, j, k, check = 0, stard = 0, order = 1 ,memo[4] = {0, 0, 0, 0};
     for(i = 0; i < 17;i++){
         if(data[i] == ',' || data[i] == '\0'){
-            for(j = stard;j < i:j++){
+            for(j = stard;j < i;j++){
                 if(i - stard == 1 && check == 0){
                   order = 1;
                   check = 1;
