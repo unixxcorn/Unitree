@@ -5,7 +5,7 @@
     <div class="col-12 bar"><bar style="width: 0%;">40</bar></div>
     <div class="col-12">Soil Moisture</div>
     <div class="col-12 bar"><bar style="width: 0%;">30</bar></div>
-    <div class="col-6"><button>Water</button></div>
-    <div class="col-6"><button>Auto Mode</button></div>
+    <div class="col-6"><a href="./water"><button>Water</button></a></div>
+    <div class="col-6"><a href="./setting"><button>Setting</button></a></div>
 </div>
 <script src="./js/slider.js"></script>
