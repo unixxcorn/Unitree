@@ -21,27 +21,33 @@ void setup(void) {
     Serial.println("SD Card initialized.");
     conf = configRead("config.utc");
     webserve();
-  }/*else{ // Slave Mode Not Ready
+  }else{
+    // Slave Mode
     Serial.println("Slave mode");
     HTTPClient http;
     http.begin(murl);
     int httpCode = http.GET();
-    Serial.println();
-    Serial.println(http.getString());
-    if (httpCode > 0) {
-      // Get the request response payload
-      DynamicJsonBuffer jsonBuffer(512);
-      JsonObject& root = jsonBuffer.parseObject(http.getString());
-      Serial.println((int)root["temp"]);
-      
+    String payload = "";
+    while(true){
+      if (httpCode > 0) {
+        // Get the request response payload
+        Serial.printf("[HTTP] GET... code: %d\n", httpCode);
+        if(httpCode == HTTP_CODE_OK) {
+          payload += http.getString();   //Get the request response payload
+          Serial.println(payload);
+          Serial.println("EOF");
+          break;
+        }
+      }
+      delay(500);
     }
     http.end();
-  }*/
+    Serial.println(payload);
+  }
+  StrToInt(payload);
 }
 
 void loop(void) {
-  // put your main code here, to run repeatedly:
-  
   if(millis() % 1000 == 0){
     sensor temp = readSensor();
     if(isnan(temp.humid) || isnan(temp.temp)){

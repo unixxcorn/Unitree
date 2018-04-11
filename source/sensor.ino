@@ -29,7 +29,7 @@ void output_control(sensor value, configure conf){
   if(value.humid < conf.humid || value.temp > conf.temp || value.mois < conf.mois){
     logFile("Water");
     digitalWrite(relaypin, 1);
-
+    delay(delayTimes);
   }else{
     if(value.humid > conf.humid){
       logFile("Humidity too high!");

@@ -35,7 +35,7 @@ configure configRead(String fileName){
     return conf;
   }else{
     file = SD.open(fileName, FILE_WRITE);
-    file.printf("0,30,30,50");
+    file.printf("0,30,30,50,\0");
     file.close();
     configRead(fileName);
   }

@@ -1,4 +1,3 @@
-#include <ArduinoJson.h>
 #include <Wire.h>
 #include <RtcDS3231.h>
 #include <ESP8266WiFi.h>
@@ -35,3 +34,4 @@ File file;
 configure conf;
 sensor value;
 bool hasSD = false;
+
