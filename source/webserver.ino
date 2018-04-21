@@ -84,7 +84,7 @@ void handleForm(){
   temp += "\",\"humid\":\"";  temp += conf.humid;
   temp += "\",\"mois\":\"";   temp += conf.mois;
   temp += "\"}";*/
-  temp += "<form method=\"POST\" class=\"row col-12\" action=\"http://192.168.1.60/config\"><div class=\"col-12\">Temperature : <b id=\"t\">";
+  temp += "<form method=\"POST\" class=\"row col-12\" action=\"/config\"><div class=\"col-12\">Temperature : <b id=\"t\">";
   temp += conf.temp;
   temp += "</b></div><div class=\"col-12\"><input oninput=\"slider()\" name=\"t\" type=\"range\" min=\"0\" max=\"100\" value=\"";
   temp += conf.temp;

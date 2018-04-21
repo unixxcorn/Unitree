@@ -8,6 +8,28 @@
 //  Mist Spray  Control Humidity
 // ======================================================
 void webserve();
+void wifi_connect();
+void fileWrite();
+String fileRead();
+void fileOverwrite();
+configure configRead();
+void logFile();
+void StrToInt();
+sensor readSensor();
+void bootSensor();
+void bootOutput();
+void output_control();
+void printSensor();
+void webserve();
+void returnOK();
+void returnFail();
+void handleSlave();
+void handleWater();
+void handleStatus();
+void handleConfig();
+void handleForm();
+void handleSDCard();
+bool loadFromSdCard();
 
 void setup(void) {
   // put your setup code here, to run once:
