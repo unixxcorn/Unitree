@@ -14,6 +14,7 @@
 // Config Humidity and Temperature Sensor (DHT11)
 #define DHTTYPE DHT11
 #define dht_dpin 2
+#define dht_pin1 16
 
 // Config SD card
 #define CSpin 15
@@ -26,8 +27,12 @@
 #define debug false
 
 // Config Slave mode
-#define slave 0 //0 for MASTER, 1 for Slave
-#define murl "Config URL"
+#define slave 0
+#define firebase 0
+#define murl "http://192.168.1.2/slave"
+
+// Config Time
+#define delayTimes 7000
 
 
 
